@@ -24,7 +24,7 @@ public class Main {
     public static void main(String[] args) {
         loadImageData();
 
-        NeuronalNetwork nn = new NeuronalNetwork(new int[]{784, 89, 10});
+        NeuronalNetwork nn = new NeuronalNetwork(new int[]{784, 89, 10}, 3);
         nn.setLinearOutput(false);
         nn.setMaxNetworkError(0.005);
         nn.setLearningRate(0.2);
@@ -36,8 +36,8 @@ public class Main {
 
         ConfusionMatrix confusionMatrix = new ConfusionMatrix();
 
-        for(int i = 0; i < testImages.size(); i++){
-            confusionMatrix.addEntry(testImages.get(i).getLabel(), nn.classify(testImages.get(i)));
+        for (DigitImage testImage : testImages) {
+            confusionMatrix.addEntry(testImage.getLabel(), nn.classify(testImage));
         }
 
         System.out.println();
